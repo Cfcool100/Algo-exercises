@@ -1,0 +1,42 @@
+ALGORITHM rental_car
+VAR
+    r1 : FLOAT := 0.7;
+    r2 : FLOAT := 0.4;
+    r3 : FLOAT := 0.2;
+    p_d : INTEGER := 100;
+    vat : FLOAT := 0.18;
+    ins : FLOAT := 0.3;
+    cost_km: INTEGER; // cette seule variable suffitn et pas besoin de l'initialiser à 0
+    cost_day : INTEGER; 
+    nb_km := INTEGER;
+    nb_days := INTEGER;
+BEGIN
+    Write(How far do you want to go with the car?);
+    Read(nb_km);
+
+    Write(How many daily do you want to do with the car?);
+    Read(nb_days);
+
+    cost_day := (nb_days * p_d) + (ins * nb_days);
+
+    IF (nb_km <= 100) THEN
+        cost_km := (nb_km * r1) +(nb_days * ins); //caculer le cout avec l'assurance
+        cost_km := cost_km(1+ vat); //ajouter la tva
+    ELSE_IF (nb_km >= 101 AND nb_km <= 1000) THEN
+        cost_km := (100 * r1) + (nb_km - 100)*r2 + (nb_days * ins);
+        cost_km := cost_km(1+ vat);
+    ELSE
+        cost_km := (100 * r1) + (900 * r2) + (nb_km - 1000)*r2 + (nb_days * ins);
+        cost_km := cost_km(1+ vat);
+    END_IF // fermer le if ici
+
+
+    cost_day := nb_days*p_d + (nb_days * ins) // le cout total jour
+    cost_day := cost_day(1+ vat); //ajout tva
+
+    IF (cost_km > cost_days) THEN // ici la condition doit etre sur les cost pas les nb
+        Write('cost_days is the best formula for you .')
+    ELSE
+        Write('cost_km is the best formula for you .')
+    END_IF
+END
